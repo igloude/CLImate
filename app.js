@@ -1,9 +1,40 @@
 var http = require("https");
+var cities = require("cities");
 
-var latitude = process.argv.slice(2, 3);
-var longitude = process.argv.slice(3, 4);
+var zip = process.argv.slice(2);
 
-function weather(latitude, longitude) {
+function printer(cities, data) {
+	console.log("________________________________________________");
+	console.log("");
+	console.log("   0   0  0000  0000  00000  0  0  0000  0000   ");
+	console.log("   0   0  0     0  0    0    0  0  0     0  0   ");
+	console.log("   0 0 0  0000  0000    0    0000  0000  0000   ");
+	console.log("   0 0 0  0     0  0    0    0  0  0     0 0    ");
+	console.log("   00000  0000  0  0    0    0  0  0000  0  0   ");
+	console.log("________________________________________________");
+	console.log("");
+	console.log(cities.zip_lookup(zip).city + ", " + cities.zip_lookup(zip).state_abbr + " " + zip);
+	console.log("");
+	console.log("Currently:");
+	console.log("----------------");
+	console.log(data.currently.summary + " and " + data.currently.temperature + "\u00b0F");
+	console.log("Feels like " + data.currently.apparentTemperature + "\u00b0F");
+	console.log("Humidity: " + data.currently.humidity);
+	console.log("Wind: " + data.currently.windSpeed + " bearing \u00b0" + data.currently.windBearing);
+	console.log("");
+	console.log(data.daily.summary);
+	console.log("");
+	console.log("Tomorrow:");
+	console.log("----------------");
+	console.log("High: " + data.daily.data[0].temperatureMax + "\u00b0F");
+	console.log("Low: " + data.daily.data[0].temperatureMin + "\u00b0F");
+	console.log("Precipitation: " + (data.daily.data[0].precipProbability * 100) + "%");
+}
+
+function weather(zip) {
+	var latitude = cities.zip_lookup(zip).latitude;
+	var longitude = cities.zip_lookup(zip).longitude;
+
 	var request = http.get('https://api.forecast.io/forecast/2a65c574d33b0f4ea0c5dda6b777c91c/' + latitude + ',' + longitude, function(response) {
 		var body = "";
 		response.on('data', function(chunk) {
@@ -12,17 +43,8 @@ function weather(latitude, longitude) {
 		response.on('end', function() {
 			if (response.statusCode === 200) {
 				try	{
-					// set up vars
 					var data = JSON.parse(body);
-					var hum;
-					if (data.currently.humidity <= 33) {hum = "low";} else if (data.currently.humidity >= 66) {hum = "high";} else {hum = "average";}
-
-					// print to console
-					console.log("Latitude [" + latitude + "]    Longitude [" + longitude + "]");
-					console.log("Here's your weather report for " + data.timezone + ":");
-					console.log("It is currently " + data.currently.summary.toLowerCase() + " with " + hum + " humidity.");
-					console.log("The temperature is " + data.currently.temperature + "F and feels like " + data.currently.apparentTemperature + "F");
-					console.log("Chance of precipitation: " + data.currently.precipProbability + "%");
+					printer(cities, data);
 				} catch(error) {
 					console.error(error.message);
 				}
@@ -36,4 +58,4 @@ function weather(latitude, longitude) {
 	});
 }
 
-weather(latitude, longitude);
+weather(zip);
