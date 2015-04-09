@@ -1,4 +1,4 @@
-var http = require("https");
+var https = require("https");
 var cities = require("cities");
 
 var zip = process.argv.slice(2);
@@ -35,7 +35,7 @@ function weather(zip) {
 	var latitude = cities.zip_lookup(zip).latitude;
 	var longitude = cities.zip_lookup(zip).longitude;
 
-	var request = http.get('https://api.forecast.io/forecast/2a65c574d33b0f4ea0c5dda6b777c91c/' + latitude + ',' + longitude, function(response) {
+	var request = https.get('https://api.forecast.io/forecast/2a65c574d33b0f4ea0c5dda6b777c91c/' + latitude + ',' + longitude, function(response) {
 		var body = "";
 		response.on('data', function(chunk) {
 			body += chunk;
