@@ -14,7 +14,9 @@ Next, install the cities package via npm:
 ```
 npm install cities
 ```
-This step isn't necessary, but makes it much more convenient. Head to your .bash_profile (or .bashrc, or .profile - whichever you prefer), and add:
+Then, go to [forecast.io] and get your own API key. (or use the one that's in the code - it's not a paid account)
+
+Next, head to your .bash_profile (or .bashrc, or .profile - whichever you prefer), and add:
 ```
 alias weather='node ~/absolute/path/to/local/repo/app.js '
 ```
