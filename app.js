@@ -3,7 +3,11 @@ var cities = require("cities");
 
 var zip = process.argv.slice(2);
 
-function printer(cities, data) {
+// allow multiple inputs
+
+// throw error when no argv
+
+function printer(data) {
 	console.log("________________________________________________");
 	console.log("");
 	console.log("   0   0  0000  0000  00000  0  0  0000  0000   ");
@@ -21,6 +25,7 @@ function printer(cities, data) {
 	console.log("Feels like " + data.currently.apparentTemperature + "\u00b0F");
 	console.log("Humidity: " + data.currently.humidity);
 	console.log("Wind: " + data.currently.windSpeed + " bearing \u00b0" + data.currently.windBearing);
+	// change bearing to cardinal directions
 	console.log("");
 	console.log(data.daily.summary);
 	console.log("");
@@ -44,12 +49,13 @@ function weather(zip) {
 			if (response.statusCode === 200) {
 				try	{
 					var data = JSON.parse(body);
-					printer(cities, data);
+					printer(data);
 				} catch(error) {
 					console.error(error.message);
 				}
 			} else {
 				console.error("Oh no! Error.");
+				// custom messages for common statusCodes
 			}
 		});
 	});
