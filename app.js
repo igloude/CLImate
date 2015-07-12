@@ -8,14 +8,7 @@ var zip = process.argv.slice(2);
 // throw error when no argv
 
 function printer(data) {
-	console.log("________________________________________________");
 	console.log("");
-	console.log("   0   0  0000  0000  00000  0  0  0000  0000   ");
-	console.log("   0   0  0     0  0    0    0  0  0     0  0   ");
-	console.log("   0 0 0  0000  0000    0    0000  0000  0000   ");
-	console.log("   0 0 0  0     0  0    0    0  0  0     0 0    ");
-	console.log("   00000  0000  0  0    0    0  0  0000  0  0   ");
-	console.log("________________________________________________");
 	console.log("");
 	console.log(cities.zip_lookup(zip).city + ", " + cities.zip_lookup(zip).state_abbr + " " + zip);
 	console.log("");
