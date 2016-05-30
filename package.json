@@ -1,0 +1,22 @@
+{
+  "name": "weather",
+  "version": "0.1.0",
+  "description": "cli weather app",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/igloude/weather.git"
+  },
+  "author": "Ian Gloude",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/igloude/weather/issues"
+  },
+  "homepage": "https://github.com/igloude/weather#readme",
+  "devDependencies": {
+    "cities": "^1.1.2"
+  }
+}
