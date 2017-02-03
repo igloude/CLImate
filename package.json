@@ -16,7 +16,7 @@
     "url": "https://github.com/igloude/weather/issues"
   },
   "homepage": "https://github.com/igloude/weather#readme",
-  "devDependencies": {
+  "dependencies": {
     "cities": "^1.1.2"
   }
 }
