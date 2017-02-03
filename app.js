@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 
-var https = 	require("https"),
-	cities = 	require("cities");
+var https 	  = require("https"),
+	cities    = require("cities"),
+	prompt    = require("prompt");
 
 var zip = process.argv.slice(2);
 

@@ -1,6 +1,6 @@
 {
   "name": "weather",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "cli weather app",
   "main": "app.js",
   "scripts": {
@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/igloude/weather#readme",
   "dependencies": {
-    "cities": "^1.1.2"
+    "cities": "^1.1.2",
+    "prompt": "^1.0.0"
   }
 }
