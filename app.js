@@ -4,13 +4,23 @@ var https 	  = require("https"),
 	cities    = require("cities"),
 	prompt    = require("prompt");
 
-var zip = process.argv.slice(2);
+prompt.start();
 
-if (zip.length > 0) {
-	weather(zip);
-} else {
-	console.log("err: no argument passed.");
+var schema = {
+	properties: {
+		zipcode: {
+			description: 'Enter a zipcode',
+			type: 'number'
+		}
+	}
 }
+
+prompt.get(schema, function(err, result) {
+
+	var zip = result.zipcode;
+	weather(zip);
+
+});
 
 function printer(data) {
 	console.log("");
