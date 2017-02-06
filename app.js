@@ -46,10 +46,6 @@ function printer(data, zip) {
 	console.log("");
 }
 
-function weather(zip) {
-
-}
-
 function requester(zip, latitude, longitude) {
 	var request = https.get('https://api.forecast.io/forecast/2a65c574d33b0f4ea0c5dda6b777c91c/' + latitude + ',' + longitude, function(response) {
 		var body = "";
