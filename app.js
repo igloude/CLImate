@@ -1,10 +1,22 @@
 #!/usr/bin/env node
 
 var https 	  = require("https"),
+    figlet    = require("figlet"),
     clear     = require("clear"),
 	  cities    = require("cities"),
 	  chalk	  = require("chalk"),
 	  prompt    = require("prompt");
+
+var art;
+
+figlet('CLI mate', function(err, fig) {
+    if (err) {
+        console.log('Something went wrong with figlet...');
+        console.dir(err);
+        return;
+    }
+    art = fig;
+});
 
 function evaluatePrompt() {
 	prompt.get(['zipcode'], function(err, result) {
@@ -51,13 +63,14 @@ function requester(zip, latitude, longitude) {
 
 function printer(data, zip) {
   clear();
+  console.log(art);
 	console.log(chalk.inverse(" " + cities.zip_lookup(zip).city + ", " + cities.zip_lookup(zip).state_abbr + " " + zip + " "));
 	console.log(data.currently.summary + " and " + chalk.red(data.currently.temperature + "\u00b0F"));
 	console.log("Feels like " + chalk.yellow(data.currently.apparentTemperature + "\u00b0F"));
 	console.log("Humidity: " + chalk.blue(data.currently.humidity));
 	console.log("Wind: " + chalk.magenta(data.currently.windSpeed) + " bearing " + chalk.magenta("\u00b0" + data.currently.windBearing));
 	console.log("");
-    console.log(chalk.cyan(data.daily.summary));
+  console.log(chalk.cyan(data.daily.summary));
 	console.log("");
 	console.log(chalk.inverse(" Tomorrow "));
 	console.log("High: " + chalk.red(data.daily.data[0].temperatureMax + "\u00b0F"));
