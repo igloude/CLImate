@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 
 var https 	  = require("https"),
-	cities    = require("cities"),
-	chalk	  = require("chalk"),
-	prompt    = require("prompt");
+    clear     = require("clear"),
+	  cities    = require("cities"),
+	  chalk	  = require("chalk"),
+	  prompt    = require("prompt");
 
 function evaluatePrompt() {
 	prompt.get(['zipcode'], function(err, result) {
@@ -49,7 +50,7 @@ function requester(zip, latitude, longitude) {
 }
 
 function printer(data, zip) {
-	// console.log("");
+  clear();
 	console.log(chalk.inverse(" " + cities.zip_lookup(zip).city + ", " + cities.zip_lookup(zip).state_abbr + " " + zip + " "));
 	console.log(data.currently.summary + " and " + chalk.red(data.currently.temperature + "\u00b0F"));
 	console.log("Feels like " + chalk.yellow(data.currently.apparentTemperature + "\u00b0F"));
