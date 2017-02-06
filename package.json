@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/igloude/weather.git"
+    "url": "git+https://github.com/igloude/CLImate.git"
   },
   "author": "Ian Gloude",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/igloude/weather/issues"
+    "url": "https://github.com/igloude/CLImate/issues"
   },
-  "homepage": "https://github.com/igloude/weather#readme",
+  "homepage": "https://github.com/igloude/CLImate#readme",
   "dependencies": {
     "chalk": "^1.1.3",
     "cities": "^1.1.2",
