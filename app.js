@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 var https 	  = require("https"),
+    clear     = require("clear"),
 	cities    = require("cities"),
 	prompt    = require("prompt");
 
@@ -48,6 +49,7 @@ function requester(zip, latitude, longitude) {
 }
 
 function printer(data, zip) {
+    clear();
 	console.log("");
 	console.log(cities.zip_lookup(zip).city + ", " + cities.zip_lookup(zip).state_abbr + " " + zip);
 	console.log("");
