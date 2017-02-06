@@ -18,6 +18,7 @@
   "homepage": "https://github.com/igloude/weather#readme",
   "dependencies": {
     "cities": "^1.1.2",
+    "figlet": "^1.2.0",
     "prompt": "^1.0.0"
   }
 }

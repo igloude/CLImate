@@ -1,8 +1,20 @@
 #!/usr/bin/env node
 
 var https 	  = require("https"),
+    figlet    = require("figlet"),
 	cities    = require("cities"),
 	prompt    = require("prompt");
+
+var art;
+
+figlet('CLI mate', function(err, fig) {
+    if (err) {
+        console.log('Something went wrong with figlet...');
+        console.dir(err);
+        return;
+    }
+    art = fig;
+});
 
 function evaluatePrompt() {
 	prompt.get(['zipcode'], function(err, result) {
@@ -48,7 +60,7 @@ function requester(zip, latitude, longitude) {
 }
 
 function printer(data, zip) {
-	console.log("");
+    console.log(art);
 	console.log(cities.zip_lookup(zip).city + ", " + cities.zip_lookup(zip).state_abbr + " " + zip);
 	console.log("");
 	console.log("Currently:");
