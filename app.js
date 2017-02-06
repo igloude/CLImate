@@ -6,25 +6,27 @@ var https 	  = require("https"),
 
 prompt.start();
 
-var schema = {
-	properties: {
-		zipcode: {
-			description: 'Enter a zipcode',
-			type: 'number'
+function evaluatePrompt() {
+	prompt.get(['zipcode'], function(err, result) {
+		var zip = result.zipcode;
+		var city = cities.zip_lookup(zip);
+
+		if ( city != null ) {
+			requester(zip, city.latitude, city.longitude);
+		} else {
+			restart();
 		}
-	}
+	});
 }
 
-prompt.get(schema, function(err, result) {
-
-	var zip = result.zipcode;
-	weather(zip);
-
-});
-
-function printer(data) {
+function restart() {
+	console.log("Please enter a valid zip code.")
 	console.log("");
-	// console.log("");
+	evaluatePrompt();
+}
+
+function printer(data, zip) {
+	console.log("");
 	console.log(cities.zip_lookup(zip).city + ", " + cities.zip_lookup(zip).state_abbr + " " + zip);
 	console.log("");
 	console.log("Currently:");
@@ -40,16 +42,16 @@ function printer(data) {
 	console.log("----------------");
 	console.log("High: " + data.daily.data[0].temperatureMax + "\u00b0F");
 	console.log("Low: " + data.daily.data[0].temperatureMin + "\u00b0F");
-	console.log("Precipitation: " + (data.daily.data[0].precipProbability * 100) + "%");
+	console.log("Precipitation: " + Math.round(data.daily.data[0].precipProbability * 100) + "%");
 	console.log("");
 }
 
 function weather(zip) {
-	var latitude = cities.zip_lookup(zip).latitude;
-	var longitude = cities.zip_lookup(zip).longitude;
 
+}
+
+function requester(zip, latitude, longitude) {
 	var request = https.get('https://api.forecast.io/forecast/2a65c574d33b0f4ea0c5dda6b777c91c/' + latitude + ',' + longitude, function(response) {
-
 		var body = "";
 		response.on('data', function(chunk) {
 			body += chunk;
@@ -58,7 +60,7 @@ function weather(zip) {
 			if (response.statusCode === 200) {
 				try	{
 					var data = JSON.parse(body);
-					printer(data);
+					printer(data, zip);
 				} catch(error) {
 					console.error(error.message);
 				}
@@ -71,3 +73,5 @@ function weather(zip) {
 		console.error(error.message);
 	});
 }
+
+evaluatePrompt();
