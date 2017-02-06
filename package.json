@@ -1,6 +1,6 @@
 {
-  "name": "weather",
-  "version": "0.3.0",
+  "name": "CLImate",
+  "version": "0.2.0",
   "description": "cli weather app",
   "main": "app.js",
   "scripts": {
