@@ -2,8 +2,9 @@
 
 var https 	  = require("https"),
     clear     = require("clear"),
-	cities    = require("cities"),
-	prompt    = require("prompt");
+	  cities    = require("cities"),
+	  chalk	  = require("chalk"),
+	  prompt    = require("prompt");
 
 function evaluatePrompt() {
 	prompt.get(['zipcode'], function(err, result) {
@@ -19,7 +20,7 @@ function evaluatePrompt() {
 }
 
 function restart() {
-	console.log("Please enter a valid zip code.")
+	console.log("Please enter a valid zip code.");
 	console.log("");
 	evaluatePrompt();
 }
@@ -49,24 +50,19 @@ function requester(zip, latitude, longitude) {
 }
 
 function printer(data, zip) {
-    clear();
+  clear();
+	console.log(chalk.inverse(" " + cities.zip_lookup(zip).city + ", " + cities.zip_lookup(zip).state_abbr + " " + zip + " "));
+	console.log(data.currently.summary + " and " + chalk.red(data.currently.temperature + "\u00b0F"));
+	console.log("Feels like " + chalk.yellow(data.currently.apparentTemperature + "\u00b0F"));
+	console.log("Humidity: " + chalk.blue(data.currently.humidity));
+	console.log("Wind: " + chalk.magenta(data.currently.windSpeed) + " bearing " + chalk.magenta("\u00b0" + data.currently.windBearing));
 	console.log("");
-	console.log(cities.zip_lookup(zip).city + ", " + cities.zip_lookup(zip).state_abbr + " " + zip);
+    console.log(chalk.cyan(data.daily.summary));
 	console.log("");
-	console.log("Currently:");
-	console.log("----------------");
-	console.log(data.currently.summary + " and " + data.currently.temperature + "\u00b0F");
-	console.log("Feels like " + data.currently.apparentTemperature + "\u00b0F");
-	console.log("Humidity: " + data.currently.humidity);
-	console.log("Wind: " + data.currently.windSpeed + " bearing \u00b0" + data.currently.windBearing);
-	console.log("");
-	console.log(data.daily.summary);
-	console.log("");
-	console.log("Tomorrow:");
-	console.log("----------------");
-	console.log("High: " + data.daily.data[0].temperatureMax + "\u00b0F");
-	console.log("Low: " + data.daily.data[0].temperatureMin + "\u00b0F");
-	console.log("Precipitation: " + Math.round(data.daily.data[0].precipProbability * 100) + "%");
+	console.log(chalk.inverse(" Tomorrow "));
+	console.log("High: " + chalk.red(data.daily.data[0].temperatureMax + "\u00b0F"));
+	console.log("Low: " + chalk.yellow(data.daily.data[0].temperatureMin + "\u00b0F"));
+	console.log("Precip: " + chalk.blue(Math.round(data.daily.data[0].precipProbability * 100) + "%"));
 	console.log("");
 }
 
