@@ -1,26 +1,29 @@
 {
-  "name": "CLImate",
-  "version": "0.2.0",
-  "description": "cli weather app",
-  "main": "app.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/igloude/CLImate.git"
-  },
-  "author": "Ian Gloude",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/igloude/CLImate/issues"
-  },
-  "homepage": "https://github.com/igloude/CLImate#readme",
-  "dependencies": {
-    "chalk": "^1.1.3",
-    "cities": "^1.1.2",
-    "figlet": "^1.2.0",
-    "clear": "0.0.1",
-    "prompt": "^1.0.0"
-  }
+    "name": "CLImate",
+    "version": "0.2.0",
+    "description": "cli weather app",
+    "main": "app.js",
+    "bin": {
+        "climate": "./app.js"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/igloude/CLImate.git"
+    },
+    "author": "Ian Gloude",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/igloude/CLImate/issues"
+    },
+    "homepage": "https://github.com/igloude/CLImate#readme",
+    "dependencies": {
+        "chalk": "^1.1.3",
+        "cities": "^1.1.2",
+        "figlet": "^1.2.0",
+        "clear": "0.0.1",
+        "prompt": "^1.0.0"
+    }
 }
